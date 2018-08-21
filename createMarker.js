@@ -6,7 +6,7 @@ Entities.addEntity({
     position: Vec3.sum(MyAvatar.position, Quat.getFront(MyAvatar.orientation)),
     "script": Script.resolvePath("Marker.js") ,
     type: "Model",
-    modelURL: "file:///C:/Users/VR2/Desktop/HighFidelity Assets/models/bluemarker_export.fbx",
+    modelURL: "https://vhilab.github.io/cdr-hf-hosting/models/bluemarker_export.fbx",
     dimensions: {"x" : 0.0153, "y" : 0.0153, "z" : 0.1650},
     name: "Marker",
     "userData": JSON.stringify({
@@ -16,7 +16,7 @@ Entities.addEntity({
     			"RightHand" : [ {
     				"x": 0.04,
     				"y": 0.12,
-    				"z": 0.04 // profile is correct, but it's gotta be in the inside of the hand
+    				"z": 0.04
     			}, {
     				"x": -0.707,
     				"y": 0,

@@ -49,7 +49,7 @@
                 ],
                 strokeWidths: [ 0.02, 0.02],
                 color: { red: 0, green: 127, blue: 0 },  // Use just the red channel from the image.
-                textures: "file:///C:/Users/VR2/Desktop/HighFidelity Assets/White_square.jpg",
+                textures: "https://vhilab.github.io/cdr-hf-hosting/White_square.jpg",
                 isUVModeStretch: true,
                 lifetime: 30  // Delete after 30 seconds
             });
