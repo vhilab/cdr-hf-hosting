@@ -3,6 +3,7 @@
 
 	var hand;
 	var _this = this;
+	var target;
 
 	_this.clickDownOnEntity = function(entityID, event){
         print("I was clicked!");
@@ -18,7 +19,14 @@
     }
 
     var lockWorldTransform = function(entityID){
-    	Mat4.print("sensor2world", MyAvatar.getSensorToWorldMatrix());
+    	target = MyAvatar.getSensorToWorldMatrix();
+
+    }
+
+    var fixWorldTransform = function(entityID){
+    	var currentPos = MyAvatar.getHeadPosition();
+    	var up = {"x": 0, "y":1.0, "z":0};
+    	MyAvatar.goToLocation(Vec3.sum(currentPos, up));
     }
 
 	function Locker(){};
@@ -33,12 +41,12 @@
 	    },
 	    startFarTrigger: function(entityID){
 	    	print("I was clicked in VR!");
-	    	lockWorldTransform();
+	    	fixWorldTransform();
 	        changeColor(entityID);
 	    },
 	    startNearTrigger: function(entityID){
 	    	print("I was clicked in VR!");
-	    	lockWorldTransform();
+	    	fixWorldTransform();
 	        changeColor(entityID);
 	    }
 	};
