@@ -26,7 +26,7 @@
     var fixWorldTransform = function(entityID){
     	var currentPos = MyAvatar.getHeadPosition();
     	var up = {"x": 0, "y":1.0, "z":0};
-    	MyAvatar.goToLocation(Vec3.sum(currentPos, up));
+    	MyAvatar.goToLocation(Vec3.sum(currentPos, up), false);
     }
 
 	function Locker(){};
