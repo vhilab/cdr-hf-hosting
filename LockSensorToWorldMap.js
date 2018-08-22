@@ -20,13 +20,20 @@
 
     var lockWorldTransform = function(entityID){
     	target = MyAvatar.getSensorToWorldMatrix();
-
     }
 
     var fixWorldTransform = function(entityID){
-    	var currentPos = MyAvatar.getHeadPosition();
-    	var up = {"x": 0, "y":1.0, "z":0};
-    	MyAvatar.goToLocation(Vec3.sum(currentPos, up), false);
+    	if (target == undefined) {
+    		print("target is undefined, locking instead.");
+    		lockWorldTransform(entityID);
+    	} else {
+    		print("target is defined.");
+    		var current_inverse = Mat4.inverse(MyAvatar.getSensorToWorldMatrix());
+    		var currentPos = MyAvatar.getHeadPosition();
+	    	var translation = Mat4.extractTranslation(Mat4.mul(target, current_inverse));
+	    	MyAvatar.goToLocation(Vec3.sum(currentPos, translation), false);
+    	}
+    	
     }
 
 	function Locker(){};
