@@ -30,7 +30,7 @@
     		print("target is defined.");
     		var current_inverse = Mat4.inverse(MyAvatar.getSensorToWorldMatrix());
     		var currentPos = MyAvatar.getHeadPosition();
-	    	var translation = Mat4.extractTranslation(Mat4.mul(target, current_inverse));
+	    	var translation = Mat4.extractTranslation(Mat4.multiply(target, current_inverse));
 	    	MyAvatar.goToLocation(Vec3.sum(currentPos, translation), false);
     	}
     	
