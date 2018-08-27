@@ -12,8 +12,6 @@ var mappingJSON = {
     ]
 };
 
-var oldMapping = Controller.
-
 var newMapping = Controller.parseMapping(JSON.stringify(mappingJSON));
 newMapping.enable();
 
