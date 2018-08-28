@@ -5,6 +5,7 @@ Entities.addEntity({
     color: { red: 255, green: 255, blue: 255 },
     dimensions: { x: .1, y: .05, z: .02 },
     name: "Eraser",
+    collisionless: true,
     "userData": JSON.stringify({
     	"grabbableKey" : { "wantsTrigger" : true },
     	"wearable" : {
