@@ -31,6 +31,7 @@
 			dimensions: { x: radius, y: distance, z: radius },
 			color: { red: 0, green: 0, blue: 127 },
 			lifetime: 3600, // delete after one hour
+			collisionless: true,
 			"userData": "\{\"eraseable\" : true\}"
 		});
 
@@ -41,6 +42,7 @@
 			dimensions: { x: radius, y: radius, z: radius },
 			color: { red: 0, green: 0, blue: 127 },
 			lifetime: 3600, // Delete after one hour
+			collisionless: true,
 			"userData": "\{\"eraseable\" : true\}",
 		});
 
