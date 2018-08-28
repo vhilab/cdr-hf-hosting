@@ -9,6 +9,7 @@ Entities.addEntity({
     modelURL: "https://vhilab.github.io/cdr-hf-hosting/models/bluemarker_export.fbx",
     dimensions: {"x" : 0.0153, "y" : 0.0153, "z" : 0.1650},
     name: "Marker",
+    collisionless: true,
     "userData": JSON.stringify({
     	"grabbableKey" : { "wantsTrigger" : true },
     	"wearable" : {
