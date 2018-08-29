@@ -1,9 +1,10 @@
 (function() {
     // Every great app starts with a great name (keep it short so that it can fit in the tablet button)
-    var APP_NAME = "CONCEPT";
+    var APP_NAME = "CDR STUDY";
     
     // Link to your app's HTML file
-    var APP_URL = "https://vhilab.github.io/cdr-hf-hosting/concept.html";
+    var APP_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/index.html";
+    var APP_ICON = "https://vhilab.github.io/cdr-hf-hosting/tablet/noun-concept_1318350.svg"
     
     // Get a reference to the tablet
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
@@ -11,6 +12,7 @@
     // "Install" your cool new app to the tablet
     // The following lines create a button on the tablet's menu screen
     var button = tablet.addButton({
+    	icon: APP_ICON,
         text: APP_NAME
     });
     
@@ -28,4 +30,10 @@
         tablet.gotoWebScreen(APP_URL);
     }
     button.clicked.connect(onClicked);
+
+    // Handle the events we're receiving from the web UI
+	function onWebEventReceived(event) {
+	   print("gemstoneApp.js received a web event: " + event);
+	}
+	tablet.webEventReceived.connect(onWebEventReceived);
 }());
