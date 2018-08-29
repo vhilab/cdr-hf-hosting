@@ -10,6 +10,8 @@
     var PAGE_DM2_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/dm2.html";
     var PAGE_DM3_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/dm3.html";
     var current_home = APP_URL;
+
+    var is_tracking_locked = false;
     
     // Get a reference to the tablet
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
@@ -47,11 +49,19 @@
 	    if (event.type === "click") {
 	    	// do different things depending on the buttons.
 	    	if (event.data == "Marker") {
-
+	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
 	    	} else if (event.data == "Eraser") {
-
+	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createEraser.js");
 	    	} else if (event.data == "Lock Tracking") {
-	    		
+	    		if (is_tracking_locked) {
+	    			Messages.sendLocalMessage('Hifi-Teleport-Disabler','none'); // enable teleporting
+	    			Controller.releaseActionEvents(); // enable rotation
+	    			is_tracking_locked = false;
+	    		} else {
+	    			Controller.captureActionEvents(); // disable rotation
+	    			Messages.sendLocalMessage('Hifi-Teleport-Disabler','both'); // disable teleporting
+	    			is_tracking_locked = true;
+	    		}
 	    	} else if (event.data == "Concept Generation Task") {
 	    		current_home = PAGE_CONCEPT_URL;
 	    		tablet.gotoWebScreen(current_home);
@@ -62,6 +72,9 @@
 	    		
 	    	} else if (event.data == "DM3") {
 	    		
+	    	} else if (event.data == "returnToMenu") {
+	    		current_home = APP_URL;
+	    		tablet.gotoWebScreen(current_home);
 	    	}
 	    }
 	}
