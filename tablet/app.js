@@ -71,9 +71,11 @@
 	    		current_home = PAGE_DM1_URL;
 	    		tablet.gotoWebScreen(current_home);
 	    	} else if (event.data == "DM2") {
-	    		
+	    		current_home = PAGE_DM2_URL;
+	    		tablet.gotoWebScreen(current_home);
 	    	} else if (event.data == "DM3") {
-	    		
+	    		current_home = PAGE_DM3_URL;
+	    		tablet.gotoWebScreen(current_home);
 	    	} else if (event.data == "returnToMenu") {
 	    		current_home = APP_URL;
 	    		tablet.gotoWebScreen(current_home);
