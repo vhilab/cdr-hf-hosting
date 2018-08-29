@@ -12,7 +12,7 @@ function addExitForm() {
 function tryToLeave() {
 	if ($('#textinput').val() === "puromycin") {
 		var clickEvent = {
-	        "type": "click",
+	        "type": "cdr-click",
 	        "data": "returnToMenu"
 	    };
 	    EventBridge.emitWebEvent(JSON.stringify(clickEvent));

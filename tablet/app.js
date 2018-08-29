@@ -40,14 +40,16 @@
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
-		print("gemstoneApp.js received a web event: " + event);
+		print("app.js received a web event: " + event);
 		// Converts the event to a JavaScript Object
 	    if (typeof event === "string") {
 	        event = JSON.parse(event);
 	    }
 
-	    if (event.type === "click") {
+	    print("type is" + event.type);
+	    if (event.type === "cdr-click") {
 	    	// do different things depending on the buttons.
+	    	print("data is" + event.data);
 	    	if (event.data == "Marker") {
 	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
 	    	} else if (event.data == "Eraser") {

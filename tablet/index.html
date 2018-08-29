@@ -51,7 +51,7 @@
                 $(".app-button").click(function(){
                     console.log(this.value + " button click");
                     var clickEvent = {
-                        "type": "click",
+                        "type": "cdr-click",
                         "data": this.value
                     };
                     EventBridge.emitWebEvent(JSON.stringify(clickEvent));
