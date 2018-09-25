@@ -8,7 +8,7 @@
             print("startNearTrigger started. [lafej]");
             var targetPosition = { x: 0.126, y:-11.49, z:-34.68};
             var orientation = { x: 0, y: 0, z: 0, w: 1 };
-            goToFeetLocation(position, true, orientation);
+            MyAvatar.goToFeetLocation(position, true, orientation);
         },
 	};
 
