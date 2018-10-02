@@ -83,7 +83,7 @@
 				var targetPosition = targetPositionDict[event.data["row"]][event.data["col"]][event.data["value"]];
 				print("target position is " + JSON.stringify(targetPosition));
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
-				MyAvatar.goToFeetLocation(targetPosition);
+				MyAvatar.goToFeetLocation(targetPosition, true, Quat.IDENTITY, false);
 			} else if (event.data == "Marker") {
 	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
 	    	} else if (event.data == "Eraser") {
