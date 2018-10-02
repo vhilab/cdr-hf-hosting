@@ -9,6 +9,7 @@
     var PAGE_DM1_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/dm1.html";
     var PAGE_DM2_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/dm2.html";
     var PAGE_DM3_URL = "https://vhilab.github.io/cdr-hf-hosting/tablet/dm3.html";
+    var PAGE_TELEPORTING = "https://vhilab.github.io/cdr-hf-hosting/tablet/teleporting.html";
     var current_home = APP_URL;
 
     var is_tracking_locked = false;
@@ -50,7 +51,12 @@
 	    if (event.type === "cdr-click") {
 	    	// do different things depending on the buttons.
 	    	print("data is" + event.data);
-	    	if (event.data == "Marker") {
+			if (type(event.data) === type({})) {
+				// it's a button press from the teleport thingy. at the moment, just teleport in.
+				var targetPosition = { x: -0.6225, y:-11.49, z:-36.46};
+				var orientation = { x: 0, y: 0, z: 0, w: 1 };
+				MyAvatar.goToFeetLocation(targetPosition, true, orientation);
+			} else if (event.data == "Marker") {
 	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
 	    	} else if (event.data == "Eraser") {
 	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createEraser.js");
@@ -79,7 +85,9 @@
 	    	} else if (event.data == "returnToMenu") {
 	    		current_home = APP_URL;
 	    		tablet.gotoWebScreen(current_home);
-	    	}
+	    	} else if (event.data == "Teleport to Room") {
+				tablet.gotoWebScreen(PAGE_TELEPORTING);
+			}
 	    }
 	}
 	tablet.webEventReceived.connect(onWebEventReceived);
