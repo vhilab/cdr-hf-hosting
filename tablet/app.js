@@ -55,7 +55,7 @@
 				// it's a button press from the teleport thingy. at the moment, just teleport in.
 				var targetPosition = { x: -0.6225, y:-11.49, z:-36.46};
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
-				MyAvatar.goToFeetLocation(targetPosition, true, orientation, false);
+				MyAvatar.goToFeetLocation(targetPosition);
 			} else if (event.data == "Marker") {
 	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
 	    	} else if (event.data == "Eraser") {
