@@ -52,8 +52,35 @@
 	    	// do different things depending on the buttons.
 	    	print("data is" + event.data);
 			if (typeof(event.data) === typeof({})) {
-				// it's a button press from the teleport thingy. at the moment, just teleport in.
-				var targetPosition = { x: -0.6225, y:-11.49, z:-36.46};
+				// it's a button press from the teleport thingy.
+				var targetPositionDict = {
+					1 : { // core
+						1 : { // table
+							"A" : { x:61.47, y:-11.49, z:-81.34 },
+							"B" : { x:61.47, y:-11.49, z:-81.34 },
+							"C" : { x:61.47, y:-11.49, z:-81.34 },
+						},
+						2 : { // no table
+							"A" : { x:66.16, y:-11.49, z:-57.0},
+							"B" : { x:66.16, y:-11.49, z:-57.0},
+							"C" : { x:66.16, y:-11.49, z:-57.0},
+						}
+					}, 
+					2 : { // periphery
+						1 : { // table
+							"A" : { x:-44.50, y:-11.49, z:-39.51 },
+							"B" : { x:-44.50, y:-11.49, z:-39.51 },
+							"C" : { x:-44.50, y:-11.49, z:-39.51 },
+						},
+						2 : { // no table
+							"A" : { x:0.29, y:-11.49, z:-33.98 },
+							"B" : { x:0.29, y:-11.49, z:-33.98 },
+							"C" : { x:0.29, y:-11.49, z:-33.98 },
+						}
+					}
+				};
+				
+				var targetPosition = targetPositionDict[event.data["row"]][event.data["col"]][event.data["value"]];
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
 				MyAvatar.goToFeetLocation(targetPosition);
 			} else if (event.data == "Marker") {
