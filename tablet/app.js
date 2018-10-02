@@ -51,7 +51,7 @@
 	    if (event.type === "cdr-click") {
 	    	// do different things depending on the buttons.
 	    	print("data is" + event.data);
-			if (type(event.data) === type({})) {
+			if (typeof(event.data) === typeof({})) {
 				// it's a button press from the teleport thingy. at the moment, just teleport in.
 				var targetPosition = { x: -0.6225, y:-11.49, z:-36.46};
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
