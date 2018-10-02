@@ -97,3 +97,10 @@ input[type=button]:disabled {
 input[type=button][pressed=pressed] {
     color: #00b4ef;
 }
+
+table.bordered {
+  border: 2px solid white
+}
+table.bordered td {
+  border: 1px solid white
+}
