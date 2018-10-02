@@ -81,6 +81,7 @@
 				};
 				
 				var targetPosition = targetPositionDict[event.data["row"]][event.data["col"]][event.data["value"]];
+				print("target position is " + targetPosition);
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
 				MyAvatar.goToFeetLocation(targetPosition);
 			} else if (event.data == "Marker") {
