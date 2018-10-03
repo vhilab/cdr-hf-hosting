@@ -47,7 +47,7 @@
     }
 
     function random(min, max) {
-        return Math.random() * (max - min + 1) + min;
+        return Math.random() * (max - min) + min;
     }
 
     function randPos(side) {
@@ -55,7 +55,7 @@
     }
 
     function randWithinReach() {
-        return Vec3.sum(randPos(0.15), { x: 0, y: 1.2, z: 0});
+        return Vec3.sum(randPos(0.3), { x: 0, y: 1.4, z: 0});
     }
 
     function createEraser(position) {
