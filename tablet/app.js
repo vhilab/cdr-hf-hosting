@@ -39,6 +39,100 @@
     }
     button.clicked.connect(onClicked);
 
+    var allMarkersAndErasers = [];
+
+    function getAvatarFront() {
+    	return Vec3.sum(MyAvatar.position, Quat.getFront(MyAvatar.orientation));
+    }
+
+    function createEraser(position) {
+    	var newEraserUUID = Entities.addEntity({
+		    position: position,
+		    "script": Script.resolvePath("Eraser.js") ,
+		    type: "Box",
+		    color: { red: 255, green: 255, blue: 255 },
+		    dimensions: { x: .1, y: .05, z: .02 },
+		    name: "Eraser",
+		    collisionless: true,
+		    "userData": JSON.stringify({
+		    	"grabbableKey" : { "wantsTrigger" : true },
+		    	"wearable" : {
+		    		"joints" : {
+		    			"RightHand" : [ {
+		    				"x": 0.0813,
+		    				"y": 0.0452,
+		    				"z": 0.0095
+		    			}, {
+		    				"x": -0.3946,
+		    				"y": -0.6604,
+		    				"z": 0.4748,
+		    				"w": -0.4275
+		    			} ],
+		    			"LeftHand" : [ {
+		    				"x": -0.0881,
+		    				"y": 0.0259,
+		    				"z": 0.0159
+		    			}, {
+		    				"x": 0.4427,
+		    				"y": -0.6519,
+		    				"z": 0.4592,
+		    				"w": 0.4099
+		    			} ]
+		    		}
+		    	}
+		    })
+		});
+
+		allMarkersAndErasers.push(newEraserUUID);
+    }
+
+    function createMarker(position) {
+    	var newMarkerUUID = Entities.addEntity({
+		    position: position,
+		    "script": Script.resolvePath("Marker.js") ,
+		    type: "Model",
+		    modelURL: "https://vhilab.github.io/cdr-hf-hosting/models/bluemarker_export.fbx",
+		    dimensions: {"x" : 0.0153, "y" : 0.0153, "z" : 0.1650},
+		    name: "Marker",
+		    collisionless: true,
+		    "userData": JSON.stringify({
+		    	"grabbableKey" : { "wantsTrigger" : true },
+		    	"wearable" : {
+		    		"joints" : {
+		    			"RightHand" : [ {
+		    				"x": 0.04,
+		    				"y": 0.12,
+		    				"z": 0.04
+		    			}, {
+		    				"x": -0.707,
+		    				"y": 0,
+		    				"z": 0,
+		    				"w": 0.707
+		    			} ],
+		    			/* {
+		    				"x" : -0.1865966,
+		    				"y" : -0.3122868,
+		    				"z" : 0.2245211,
+		    				"w" : 0.9040182
+		    			} ],*/
+		    			"LeftHand" : [ {
+		    				"x": -0.04,
+		    				"y": 0.12,
+		    				"z": 0.04
+		    			}, {
+		    				"x": -0.707,
+		    				"y": 0,
+		    				"z": 0.0,
+		    				"w": 0.707
+		    			} ]
+		    		}
+		    	}
+		    })
+		});
+
+		allMarkersAndErasers.push(newMarkerUUID);
+    }
+
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
 		print("app.js received a web event: " + event);
@@ -85,9 +179,9 @@
 				var orientation = { x: 0, y: 0, z: 0, w: 1 };
 				MyAvatar.goToFeetLocation(targetPosition, true, Quat.IDENTITY, false);
 			} else if (event.data == "Marker") {
-	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createMarker.js");
+	    		createMarker(getAvatarFront());
 	    	} else if (event.data == "Eraser") {
-	    		Script.include("https://vhilab.github.io/cdr-hf-hosting/createEraser.js");
+	    		createEraser(getAvatarFront());
 	    	} else if (event.data == "Lock Tracking") {
 	    		if (is_tracking_locked) {
 	    			Messages.sendLocalMessage('Hifi-Teleport-Disabler','none'); // enable teleporting
