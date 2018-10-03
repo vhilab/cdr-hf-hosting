@@ -45,6 +45,18 @@
     	return Vec3.sum(MyAvatar.position, Quat.getFront(MyAvatar.orientation));
     }
 
+    function random(min, max) {
+        return Math.random() * (max - min + 1) + min;
+    }
+
+    function randPos(side) {
+        return { x: random(-side, side), y: random(-side, side), z: random(-side, side)};
+    }
+
+    function randWithinReach() {
+        return Vec3.sum(randPos(0.3), { x: 0, y: 1, z: 0});
+    }
+
     function createEraser(position) {
     	var newEraserUUID = Entities.addEntity({
 		    position: position,
@@ -175,8 +187,14 @@
 				};
 				
 				var targetPosition = targetPositionDict[event.data["row"]][event.data["col"]][event.data["value"]];
-				print("target position is " + JSON.stringify(targetPosition));
-				var orientation = { x: 0, y: 0, z: 0, w: 1 };
+				//print("target position is " + JSON.stringify(targetPosition));
+				//var orientation = { x: 0, y: 0, z: 0, w: 1 };
+				
+				// create a marker and eraser in the 
+				createMarker(Vec3.sum(targetPosition, randWithinReach()));
+				createEraser(Vec3.sum(targetPosition, randWithinReach()));
+
+
 				MyAvatar.goToFeetLocation(targetPosition, true, Quat.IDENTITY, false);
 			} else if (event.data == "Marker") {
 	    		createMarker(getAvatarFront());
