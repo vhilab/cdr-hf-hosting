@@ -149,7 +149,13 @@
     function deleteAllMarkersAndErasers (){
 	    while(allMarkersAndErasers.length > 0) {
 	        Entities.deleteEntity(allMarkersAndErasers.pop());
+	        for Entity in Entities {
+	        	if (Entity.type == "Shape") {
+	        		Entities.deleteEntity(Entity);
+	        	}
+	        }
 	    }
+
 	}
 
     // Handle the events we're receiving from the web UI
