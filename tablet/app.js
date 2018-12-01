@@ -150,11 +150,6 @@
 	    while(allMarkersAndErasers.length > 0) {
 	        Entities.deleteEntity(allMarkersAndErasers.pop());
 	    }
-	    for entity in Entities {
-	        if (entity.type == "Shape") {
-	        	Entities.deleteEntity(entity);
-	        }
-	    }
 	}
 
     // Handle the events we're receiving from the web UI
