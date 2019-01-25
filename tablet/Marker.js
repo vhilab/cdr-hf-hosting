@@ -25,16 +25,17 @@
 
 		var shape = Entities.addEntity({
 			type: "Shape",
-			shape: "Cylinder",
+			shape: "Cube",
 			position: center,
 			rotation: tilt,
-			dimensions: { x: radius, y: distance, z: radius },
+			dimensions: { x: radius, y: distance + 2 * radius, z: radius },
 			color: { red: 0, green: 0, blue: 127 },
 			lifetime: 3600, // delete after one hour
 			collisionless: true,
 			"userData": "\{\"eraseable\" : true\}"
 		});
 
+		/* commenting out the shpere
 		var shape = Entities.addEntity({
 			type: "Shape",
 			shape: "Sphere",
@@ -45,6 +46,7 @@
 			collisionless: true,
 			"userData": "\{\"eraseable\" : true\}",
 		});
+		*/
 
 		/*
 		// startPos shape
