@@ -53,9 +53,13 @@
     function randPos(side) {
         return { x: random(-side, side), y: random(-side, side), z: random(-side, side)};
     }
+    
+    function randPos(x, y, z) {
+        return { x: random(-x, x), y: random(-y, y), z: random(-z, z)};
+    }
 
     function randWithinReach() {
-        return Vec3.sum(randPos(0.3), { x: 0, y: 1.4, z: 0});
+        return Vec3.sum(randPos(0.3, 0, 0.3), { x: 0, y: 1, z: 0});
     }
 
     function createEraser(position) {
@@ -200,10 +204,10 @@
 				deleteAllMarkersAndErasers();
 				
 				// create markers and erasers within reach
-				for (var i = 0; i < 3; i++) {
-					createMarker(Vec3.sum(targetPosition, randWithinReach()));
-					createEraser(Vec3.sum(targetPosition, randWithinReach()));
-				}
+				// each person separately maintains their marker and eraser list, so only make one.
+				createMarker(Vec3.sum(targetPosition, randWithinReach()));
+				createEraser(Vec3.sum(targetPosition, randWithinReach()));
+				
 
 				MyAvatar.goToFeetLocation(targetPosition, true, Quat.IDENTITY, false);
 			} else if (event.data == "Marker") {
