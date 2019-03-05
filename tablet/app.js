@@ -36,6 +36,12 @@
     // Link to your app's HTML file
     // When a user clicks the app button, we'll display our app on the tablet screen
     function onClicked() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
+		//Send the proper header information along with the request
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhr.send(JSON.stringify({"data": 33.0, "session_id": "onClicked in app.js"}));
+	    
         tablet.gotoWebScreen(current_home);
     }
     button.clicked.connect(onClicked);
