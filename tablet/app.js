@@ -36,11 +36,6 @@
     // Link to your app's HTML file
     // When a user clicks the app button, we'll display our app on the tablet screen
     function onClicked() {
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
-		//Send the proper header information along with the request
-		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		xhr.send(JSON.stringify({"data": 33.0, "session_id": "onClicked in app.js"}));
 	    
         tablet.gotoWebScreen(current_home);
     }
@@ -161,6 +156,18 @@
 	        Entities.deleteEntity(allMarkersAndErasers.pop());
 	    }
 	}
+	
+	function sendPositionData() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
+		
+		// here, add the callback to beep the light a little.
+		
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhr.send(JSON.stringify({"data": 34.0, "session_id": "sendPositionData in app.js"}));
+	}
+	
+	var positionTimer = Script.setInterval(sendPositionData, 2000);
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
