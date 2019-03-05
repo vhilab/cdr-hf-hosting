@@ -98,7 +98,7 @@ input[type=button][pressed=pressed] {
     color: #00b4ef;
 }
 
-p.pingback {
+code.pingback {
     color: #0f0;
 }
 
