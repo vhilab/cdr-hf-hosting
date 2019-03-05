@@ -63,6 +63,27 @@
                     };
                     EventBridge.emitWebEvent(JSON.stringify(clickEvent));
                 });
+                
+                function onWebEventReceived(event) {
+                    console.log("index.html received a web event: " + event);
+                    if (typeof event === "string") {
+                        event = JSON.parse(event);
+                    }
+                    console.log("type is" + event.type);
+                    if (event.type === "cdr-script") {
+                        // do different things depending on the buttons.
+                        console.log("data is" + event.data);
+                        if (event.data === "pos data ack") {
+                            console.log("ack'd");
+                            $("#ping").addClass("pingback");
+                            setTimeout(function() {
+                                console.log("done ack'd");
+                                $("#ping").removeClass("pingback");
+                            }, 1000);
+                        }
+                    }
+                }
+                EventBridge.webEventReceived.connect(onWebEventReceived);
             }
             $(document).ready(main);
         </script>
