@@ -162,6 +162,15 @@
 		xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
 		
 		// here, add the callback to beep the light a little.
+		xhr.onreadystatechange = function() { // Call a function when the state changes.
+		    if (this.readyState === XMLHttpRequest.DONE) {
+				console.log("request finished");
+				if (this.status === 201) {
+					console.log("received 201");
+					tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
+				}
+		    }
+		}
 		
 		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xhr.send(JSON.stringify({"data": 34.0, "session_id": "sendPositionData in app.js"}));
