@@ -163,6 +163,7 @@
 		
 		// here, add the callback to beep the light a little.
 		xhr.onreadystatechange = function() { // Call a function when the state changes.
+			console.log("xhr state change");
 		    if (xhr.readyState === XMLHttpRequest.DONE) {
 				console.log("request DONE");
 			    	console.log(xhr.status); // it appears this.status is undefined?
