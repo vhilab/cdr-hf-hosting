@@ -163,10 +163,10 @@
 		
 		// here, add the callback to beep the light a little.
 		xhr.onreadystatechange = function() { // Call a function when the state changes.
-		    if (this.readyState === XMLHttpRequest.DONE) {
-				console.log("request DONE, status is:");
-			    	console.log(this.status)
-				if (this.status === 201) {
+		    if (xhr.readyState === XMLHttpRequest.DONE) {
+				console.log("request DONE");
+			    	console.log(xhr.status); // it appears this.status is undefined?
+				if (xhr.status === 201) {
 					console.log("received 201");
 					tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
 				}
