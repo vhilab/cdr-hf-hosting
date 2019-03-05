@@ -98,6 +98,10 @@ input[type=button][pressed=pressed] {
     color: #00b4ef;
 }
 
+p.pingback {
+    color: #0f0;
+}
+
 table.bordered {
   border: 2px solid white
 }
