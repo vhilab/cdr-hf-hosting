@@ -184,7 +184,7 @@
 			    
 
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(JSON.stringify({"data": 35.0, "session_id": "sendPositionData in app.js"}));
+			xhr.send(JSON.stringify(data));
 			// this doesn't do it right? it appears??
 			//tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
 		}
