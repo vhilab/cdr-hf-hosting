@@ -158,26 +158,35 @@
 	    }
 	}
 	
+	var sessionUUID = Uuid.generate();
+	
 	function sendPositionData() {
 		if (is_position_collecting) {
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
 
 			// here, add the callback to beep the light a little.
-			xhr.onreadystatechange = function() { // Call a function when the state changes.
-				console.log("xhr state change");
-				if (this.readyState === XMLHttpRequest.DONE) {
-					console.log("request DONE");
-						console.log(this.status); // it appears this.status is undefined?
-					if (this.status === 201) {
-						console.log("received 201");
-					}
-				}
-			}
+			//xhr.onreadystatechange = function() { // Call a function when the state changes.
+			//	console.log("xhr state change");
+			//	if (this.readyState === XMLHttpRequest.DONE) {
+			//		console.log("request DONE");
+			//			console.log(this.status); // it appears this.status is undefined?
+			//		if (this.status === 201) {
+			//			console.log("received 201");
+			//		}
+			//	}
+			//}
+			
+			var data = {
+				"session_id" : sessionUUID,
+				"data" : HMD.position.x,
+			};
+			    
 
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			xhr.send(JSON.stringify({"data": 35.0, "session_id": "sendPositionData in app.js"}));
-			tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
+			// this doesn't do it right? it appears??
+			//tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
 		}
 	}
 	
