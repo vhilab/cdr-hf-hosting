@@ -212,7 +212,7 @@
 		}
 	}
 	
-	var positionTimer = Script.setInterval(sendPositionData, 2000);
+	var positionTimer = Script.setInterval(sendPositionData, 50);
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
