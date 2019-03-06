@@ -159,6 +159,8 @@
 	}
 	
 	var sessionUUID = Uuid.generate();
+	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
+	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
 	
 	function sendPositionData() {
 		if (is_position_collecting) {
@@ -179,7 +181,27 @@
 			
 			var data = {
 				"session_id" : sessionUUID,
-				"data" : HMD.position.x,
+				"data" : [{
+					"head" : {
+						"pos" : HMD.position,
+						"rot" : HMD.orientation,
+					},
+					"left" : {
+						"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(leftHandIndex),
+						"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(leftHandIndex)
+					},
+					"right" : {
+						"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(rightHandIndex),
+						"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(rightHandIndex)
+					},
+					"avatar" : {
+						"pos" : MyAvatar.position,
+						"rot" : MyAvatar.orientation,
+					},
+					"mounted" : HMD.mounted,
+					"note" : "",
+					"sent" : Date.now(),
+				}]
 			};
 			    
 
@@ -190,7 +212,7 @@
 		}
 	}
 	
-	var positionTimer = Script.setInterval(sendPositionData, 50);
+	var positionTimer = Script.setInterval(sendPositionData, 2000);
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
