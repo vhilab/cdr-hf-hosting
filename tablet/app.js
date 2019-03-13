@@ -286,6 +286,7 @@
 			var nearbyItems = Entities.findEntitiesInBox(MyAvatar.position, 10);
 			nearbyItems.forEach(function(elem) {
 	        		var elemProperties = Entities.getEntityProperties(elem, ["userData"]);
+				print(elemProperties.userData);
 	        		properties = JSON.parse(elemProperties.userData);
 	        		if (properties.eraseable) {
 	        			Entities.deleteEntity(elem)
