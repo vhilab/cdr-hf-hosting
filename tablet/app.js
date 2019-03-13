@@ -282,6 +282,15 @@
 	    			Messages.sendLocalMessage('Hifi-Teleport-Disabler','both'); // disable teleporting
 	    			is_tracking_locked = true;
 	    		}
+	    	} else if (event.data == "Erase Writings") {
+			var nearbyItems = Entities.findEntitiesInBox(MyAvatar.position, 10);
+			nearbyItems.forEach(function(elem) {
+	        		var elemProperties = Entities.getEntityProperties(elem, ["userData"]);
+	        		properties = JSON.parse(elemProperties.userData);
+	        		if (properties.eraseable) {
+	        			Entities.deleteEntity(elem)
+	        		}
+	        	});
 	    	} else if (event.data == "Concept Generation Task") {
 	    		current_home = PAGE_CONCEPT_URL;
 	    		tablet.gotoWebScreen(current_home);
