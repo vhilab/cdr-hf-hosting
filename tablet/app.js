@@ -287,10 +287,12 @@
 			nearbyItems.forEach(function(elem) {
 	        		var elemProperties = Entities.getEntityProperties(elem, ["userData"]);
 				print(elemProperties.userData);
-	        		properties = JSON.parse(elemProperties.userData);
-	        		if (properties.eraseable) {
-	        			Entities.deleteEntity(elem)
-	        		}
+				if (elemProperties.userData) {
+					properties = JSON.parse(elemProperties.userData);
+					if (properties.eraseable) {
+						Entities.deleteEntity(elem)
+					}
+				}
 	        	});
 	    	} else if (event.data == "Concept Generation Task") {
 	    		current_home = PAGE_CONCEPT_URL;
