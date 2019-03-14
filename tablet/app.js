@@ -286,12 +286,12 @@
 			var nearbyItems = Entities.findEntities(MyAvatar.position, 100);
 			nearbyItems.forEach(function(elem) {
 	        		var elemProperties = Entities.getEntityProperties(elem, ["userData"]);
-				print(elemProperties.userData);
-				if (elemProperties.userData) {
+				try {
 					properties = JSON.parse(elemProperties.userData);
 					if (properties.eraseable) {
 						Entities.deleteEntity(elem)
 					}
+				} catch (error) {
 				}
 	        	});
 	    	} else if (event.data == "Concept Generation Task") {
