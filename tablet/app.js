@@ -283,7 +283,7 @@
 	    			is_tracking_locked = true;
 	    		}
 	    	} else if (event.data == "Erase Writings") {
-			var nearbyItems = Entities.findEntities(MyAvatar.position, 10);
+			var nearbyItems = Entities.findEntities(MyAvatar.position, 100);
 			nearbyItems.forEach(function(elem) {
 	        		var elemProperties = Entities.getEntityProperties(elem, ["userData"]);
 				print(elemProperties.userData);
