@@ -24,5 +24,5 @@ Users.usernameFromIDReply.connect(username_reply);
 
 Script.setInterval(send_avatar_ids, interval);
 
-#send_avatar_ids()
+//send_avatar_ids()
 
