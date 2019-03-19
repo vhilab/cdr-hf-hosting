@@ -219,7 +219,7 @@
 				}]
 			};
 			
-			print("Username == " + username);
+			//print("Username == " + username);
 			    
 
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
