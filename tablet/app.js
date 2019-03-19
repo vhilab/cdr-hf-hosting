@@ -171,11 +171,7 @@
 	Users.usernameFromIDReply.connect(username_reply);
 
 	var sessionUUID = MyAvatar.sessionUUID;
-	
-	
-	function getUsername() {
-		Users.requestUsernameFromID(sessionUUID);
-	}
+	Users.requestUsernameFromID(sessionUUID);
 	
 	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
 	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
