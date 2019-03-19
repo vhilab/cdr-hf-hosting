@@ -158,6 +158,13 @@
 	    }
 	}
 	
+	function getSessionUUID() {
+		var avatars = AvatarManager.getAvatarsInRange(MyAvatar.position, 0.01);
+		print(avatars)
+	}
+	
+	getSessionUUID();
+	
 	var sessionUUID = Uuid.generate();
 	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
 	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
