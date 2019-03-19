@@ -14,6 +14,7 @@
 
     var is_tracking_locked = false;
 	var is_position_collecting = false;
+	var username = "";
     
     // Get a reference to the tablet
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
@@ -158,14 +159,24 @@
 	    }
 	}
 	
-	function getSessionUUID() {
-		var avatars = AvatarManager.getAvatarsInRange(MyAvatar.position, 0.01);
-		print(avatars)
+
+	var username = "";
+	function username_reply(nodeID, userName, machineFingerprint, isAdmin) {
+		print("nodeID " + nodeID)
+		print("userName " + userName)
+		print("machineFingerprint " + machineFingerprint)
+		print("isAdmin " + isAdmin)
+		username = userName;
+	}
+	Users.usernameFromIDReply.connect(username_reply);
+
+	var sessionUUID = MyAvatar.sessionUUID;
+	
+	
+	function getUsername() {
+		Users.requestUsernameFromID(sessionUUID);
 	}
 	
-	getSessionUUID();
-	
-	var sessionUUID = Uuid.generate();
 	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
 	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
 	
@@ -208,8 +219,11 @@
 					"mounted" : HMD.mounted,
 					"note" : "",
 					"sent" : Date.now(),
+					"username" : username
 				}]
 			};
+			
+			print("Username == " + username);
 			    
 
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
