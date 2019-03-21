@@ -170,8 +170,8 @@
 	}
 	Users.usernameFromIDReply.connect(username_reply);
 
-	var sessionUUID = MyAvatar.sessionUUID;
-	Users.requestUsernameFromID(sessionUUID);
+	var sessionUUID = Uuid.generate(); //MyAvatar.sessionUUID;
+	//Users.requestUsernameFromID(sessionUUID);
 	
 	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
 	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
