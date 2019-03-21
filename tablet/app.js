@@ -160,7 +160,7 @@
 	}
 	
 
-	var username = "";
+	var username = "to_calc";
 	function username_reply(nodeID, userName, machineFingerprint, isAdmin) {
 		print("nodeID " + nodeID)
 		print("userName " + userName)
