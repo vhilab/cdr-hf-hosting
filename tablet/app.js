@@ -173,11 +173,6 @@
 
 	var sessionUUID = Uuid.generate(); //MyAvatar.sessionUUID;
 	//Users.requestUsernameFromID(sessionUUID);
-	
-	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
-	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
-	
-	
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
@@ -279,6 +274,8 @@
 		} else if (event.data == "Collect Position Data") {
 			is_position_collecting = !is_position_collecting
 			if (is_position_collecting) {
+				var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
+				var rightHandIndex = MyAvatar.getJointIndex("RightHand");
 				
 				function sendPositionData() {
 					var xhr = new XMLHttpRequest();
