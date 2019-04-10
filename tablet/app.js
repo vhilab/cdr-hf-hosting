@@ -15,6 +15,7 @@
     var is_tracking_locked = false;
 	var is_position_collecting = false;
 	var username = "";
+    var position_timer = null;
     
     // Get a reference to the tablet
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
@@ -176,60 +177,7 @@
 	var leftHandIndex = MyAvatar.getJointIndex("LeftHand");
 	var rightHandIndex = MyAvatar.getJointIndex("RightHand");
 	
-	function sendPositionData() {
-		if (is_position_collecting) {
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
-
-			// here, add the callback to beep the light a little.
-			//xhr.onreadystatechange = function() { // Call a function when the state changes.
-			//	console.log("xhr state change");
-			//	if (this.readyState === XMLHttpRequest.DONE) {
-			//		console.log("request DONE");
-			//			console.log(this.status); // it appears this.status is undefined?
-			//		if (this.status === 201) {
-			//			console.log("received 201");
-			//		}
-			//	}
-			//}
-			
-			var data = {
-				"session_id" : sessionUUID,
-				"data" : [{
-					"head" : {
-						"pos" : HMD.position,
-						"rot" : HMD.orientation,
-					},
-					"left" : {
-						"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(leftHandIndex),
-						"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(leftHandIndex)
-					},
-					"right" : {
-						"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(rightHandIndex),
-						"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(rightHandIndex)
-					},
-					"avatar" : {
-						"pos" : MyAvatar.position,
-						"rot" : MyAvatar.orientation,
-					},
-					"mounted" : HMD.mounted,
-					"note" : "",
-					"sent" : Date.now(),
-					"username" : username
-				}]
-			};
-			
-			//print("Username == " + username);
-			    
-
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(JSON.stringify(data));
-			// this doesn't do it right? it appears??
-			//tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
-		}
-	}
 	
-	var positionTimer = Script.setInterval(sendPositionData, 50);
 
     // Handle the events we're receiving from the web UI
 	function onWebEventReceived(event) {
@@ -328,9 +276,67 @@
 	    		tablet.gotoWebScreen(current_home);
 	    	} else if (event.data == "Teleport to Room") {
 				tablet.gotoWebScreen(PAGE_TELEPORTING);
-			} else if (event.data == "Collect Position Data") {
-				is_position_collecting = !is_position_collecting;
+		} else if (event.data == "Collect Position Data") {
+			is_position_collecting = !is_position_collecting
+			if (is_position_collecting) {
+				
+				function sendPositionData() {
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", "https://cdr-hf-tracking.herokuapp.com/dump/", true);
+
+					// here, add the callback to beep the light a little.
+					//xhr.onreadystatechange = function() { // Call a function when the state changes.
+					//	console.log("xhr state change");
+					//	if (this.readyState === XMLHttpRequest.DONE) {
+					//		console.log("request DONE");
+					//			console.log(this.status); // it appears this.status is undefined?
+					//		if (this.status === 201) {
+					//			console.log("received 201");
+					//		}
+					//	}
+					//}
+
+					var data = {
+						"session_id" : sessionUUID,
+						"data" : [{
+							"head" : {
+								"pos" : HMD.position,
+								"rot" : HMD.orientation,
+							},
+							"left" : {
+								"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(leftHandIndex),
+								"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(leftHandIndex)
+							},
+							"right" : {
+								"pos" : MyAvatar.getAbsoluteJointTranslationInObjectFrame(rightHandIndex),
+								"rot" : MyAvatar.getAbsoluteJointRotationInObjectFrame(rightHandIndex)
+							},
+							"avatar" : {
+								"pos" : MyAvatar.position,
+								"rot" : MyAvatar.orientation,
+							},
+							"mounted" : HMD.mounted,
+							"note" : "",
+							"sent" : Date.now(),
+							"username" : username
+						}]
+					};
+
+					//print("Username == " + username);
+
+
+					xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+					xhr.send(JSON.stringify(data));
+					// this doesn't do it right? it appears??
+					//tablet.emitScriptEvent(JSON.stringify({"type": "cdr-script", "data" : "pos data ack"}));
+				}
+
+				position_timer = Script.setInterval(sendPositionData, 50);
+			} else {
+				Script.clearInterval(position_timer);
 			}
+			
+		}
 	    }
 	}
 	tablet.webEventReceived.connect(onWebEventReceived);
